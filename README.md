@@ -1,10 +1,5 @@
 # Inventaris Medis API — Studi Kasus SCoT
 
-> Diagram tugas: (placeholder)
->
-> Jika Anda memiliki file gambar diagram tugas, unggah file tersebut ke `docs/tugas-diagram.png`
-> atau berikan URL publiknya, lalu gantikan placeholder ini dengan:
-> `![Diagram Tugas](docs/tugas-diagram.png)`
 
 Implementasi nyata dari prompt SCoT (Structured Chain-of-Thought) yang dirancang
 sebagai jawaban Tugas 2. Proyek ini dibuat untuk menunjukkan bahwa setiap baris
