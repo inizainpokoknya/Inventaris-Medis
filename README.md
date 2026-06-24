@@ -5,6 +5,31 @@ sebagai jawaban Tugas 2. Proyek ini dibuat untuk menunjukkan bahwa setiap baris
 pada prompt SCoT punya jejak yang dapat ditelusuri di kode — bukan sekadar teks
 niat baik.
 
+## Ringkasan Tugas
+
+Tugas studi kasus ini terbagi menjadi dua bagian utama:
+
+- TUGAS 1 — Analisis Risiko
+  - Tujuan: Identifikasi tiga kerentanan fatal jika aplikasi dibangun menggunakan
+    "pure vibe coding" tanpa review keamanan.
+  - Contoh kerentanan yang diidentifikasi di tugas ini:
+    1. Kebocoran data sensitif (mis. pelanggaran HIPAA) karena logging atau
+       penyimpanan kredensial/PHI tanpa enkripsi.
+    2. SQL Injection akibat query yang dikonstruksi dengan concatenation string
+       dari input user.
+    3. Kekurangan otorisasi/akses peran (role-based access control) sehingga
+       pengguna dengan peran terbatas dapat melakukan aksi berbahaya (mis. POST/PUT/DELETE pada resource sensitif).
+  - Output: Laporan singkat yang memetakan risiko dan mitigasi (mis. parameterized queries, enkripsi-at-rest, auditing, rate limiting).
+
+- TUGAS 2 — Desain SCoT (Structured Chain-of-Thought)
+  - Tujuan: Menulis ulang instruksi desain menggunakan kerangka SCoT sehingga
+    implementasi backend mengikuti pola yang terstruktur dan dapat ditelusuri.
+  - Komponen yang didesain:
+    - Format Input-Output: spesifikasi bentuk request dan response, field wajib, tipe data, dan kolom yang tidak pernah diekspose (mis. `cost_price`).
+    - Sequence/Branching: urutan middleware dan alur pengambilan keputusan (mis. `authenticate -> authorize -> validateBody -> controller`) serta branching untuk kasus spesifik (mis. PERAWAT ditolak untuk operasi tertentu, NARKOTIKA wajib audit log).
+    - Security constraints: aturan wajib seperti enkripsi, penyimpanan secret di environment variables, pencatatan audit untuk transaksi sensitif, row-level locking, dan validasi ketat terhadap input mencurigakan.
+  - Output: README ini dan implementasi kode (lihat tabel "Pemetaan Prompt SCoT -> Kode"), plus bukti uji manual yang mendemonstrasikan constraint yang ditetapkan.
+
 ## Cara Menjalankan
 
 ```bash
@@ -37,8 +62,8 @@ npm run dev
 - `keterangan` wajib diisi khusus untuk NARKOTIKA saat update stok (validasi
   tambahan di service layer), memperkuat traceability "siapa, kapan, perubahan apa"
   yang diminta di Branch #2.
-- Audit log tetap dicatat untuk kategori REGULAR juga (governance yang baik),
-  tetapi hanya NARKOTIKA yang diberi validasi keras (wajib keterangan).
+- Audit log tetap dicatat untuk kategori REGULAR juga (governance yang baik), tetapi
+  hanya NARKOTIKA yang diberi validasi keras (wajib keterangan).
 
 ## Yang Belum Termasuk
 
